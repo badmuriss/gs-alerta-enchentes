@@ -20,10 +20,9 @@ O objetivo é capacitar os cidadãos com informações em tempo real e históric
 
 ## 🎯 Funcionalidades Principais
 
-- **Alertas Preditivos:** Notificações de risco de enchente com antecedência configurável (1 semana, 1 dia, tempo real).
+- **Alertas Preditivos:** Notificações de risco de enchente com antecedência baseado nos sensores IoT.
 - **Monitoramento Personalizado:** Usuários podem monitorar um ou múltiplos endereços de interesse (residência, trabalho, familiares).
 - **Dashboard de Risco:** Painel principal com um resumo conciso do nível de risco (representado por cor e porcentagem), previsão de chuvas e outras condições climáticas.
-- **Mapa Interativo de Risco (Premium):** Visualização de um mapa do Brasil com zonas de risco coloridas de acordo com a probabilidade de enchente.
 - **Orientações de Segurança:** Uma seção de FAQ com informações vitais sobre como agir antes, durante e depois de uma enchente, com contatos de emergência.
 
 ## 🛠️ Tecnologias Utilizadas
@@ -37,7 +36,7 @@ O objetivo é capacitar os cidadãos com informações em tempo real e históric
 | ├── Cloud Firestore| Banco de dados NoSQL para armazenar dados do usuário.                |
 | └── FCM            | Envio de notificações push para os alertas críticos.                 |
 | Weatherbit.io API  | Fonte exclusiva de dados meteorológicos (atuais, previsões e históricos). |
-| Modelo de IA (ML)  | Algoritmo treinado para analisar os dados e prever o risco de enchente. |
+| Sensores IoT  | Sensores para identificação de nível da água. |
 
 ## 🏛️ Arquitetura
 
