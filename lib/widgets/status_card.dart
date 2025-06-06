@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class StatusCard extends StatelessWidget {
   final double waterLevel;
 
-  const StatusCard({Key? key, required this.waterLevel}) : super(key: key);
+  const StatusCard({super.key, required this.waterLevel});
 
   @override
   Widget build(BuildContext context) {

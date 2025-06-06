@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 import 'api/weather_api.dart';
 import 'providers/water_level_provider.dart';
 import 'providers/weather_provider.dart';
+import 'providers/theme_provider.dart'; // Novo provider
 import 'services/notification_service.dart';
+import 'ui/theme.dart';
 import 'home_scaffold.dart';
 
 void main() async {
@@ -24,6 +26,9 @@ void main() async {
         ChangeNotifierProvider(
           create: (_) => WeatherProvider(weatherApi),
         ),
+        ChangeNotifierProvider(
+          create: (_) => ThemeProvider(), // Novo provider para o tema
+        ),
       ],
       child: const MyApp(),
     ),
@@ -35,28 +40,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    
     return MaterialApp(
       title: 'Alerta Enchentes',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        primaryColor: Colors.blue.shade700,
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.blue,
-          brightness: Brightness.light,
-        ).copyWith(
-          secondary: Colors.amber.shade700,
-        ),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.blue.shade700,
-          foregroundColor: Colors.white,
-          elevation: 4.0,
-          titleTextStyle: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
+      theme: themeProvider.isDarkMode ? AppTheme.darkTheme : AppTheme.lightTheme,
       home: const HomeScaffold(),
       debugShowCheckedModeBanner: false,
     );

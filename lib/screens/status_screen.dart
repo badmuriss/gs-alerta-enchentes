@@ -4,7 +4,7 @@ import '../providers/water_level_provider.dart';
 import '../widgets/status_card.dart';
 
 class StatusScreen extends StatelessWidget {
-  const StatusScreen({Key? key}) : super(key: key);
+  const StatusScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,11 +1,15 @@
+import 'package:alerta_enchentes_novo/screens/simulation_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'providers/theme_provider.dart';
+import 'ui/icons.dart';
+import 'ui/theme.dart';
 import 'screens/dashboard_screen.dart';
 import 'screens/status_screen.dart';
-import 'screens/simulation_screen.dart';
 import 'screens/weather_screen.dart';
 
 class HomeScaffold extends StatefulWidget {
-  const HomeScaffold({Key? key}) : super(key: key);
+  const HomeScaffold({super.key});
 
   @override
   State<HomeScaffold> createState() => _HomeScaffoldState();
@@ -36,42 +40,75 @@ class _HomeScaffoldState extends State<HomeScaffold> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDarkMode = themeProvider.isDarkMode;
+    
     return Scaffold(
       appBar: AppBar(
         title: Text(_appBarTitles[_selectedIndex]),
-      ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard_outlined),
-            activeIcon: Icon(Icons.dashboard),
-            label: 'Dashboard',
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: isDarkMode ? AppTheme.darkGradient : AppTheme.lightGradient,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shield_outlined),
-            activeIcon: Icon(Icons.shield),
-            label: 'Status',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.water_outlined),
-            activeIcon: Icon(Icons.water_rounded),
-            label: 'Simulação',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.thermostat_outlined),
-            activeIcon: Icon(Icons.thermostat),
-            label: 'Clima',
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              isDarkMode ? Icons.wb_sunny_outlined : Icons.nightlight_round,
+              color: isDarkMode ? AppTheme.primaryGreen : AppTheme.secondaryGreen,
+            ),
+            onPressed: () {
+              themeProvider.toggleTheme();
+            },
+            tooltip: isDarkMode ? 'Mudar para tema claro' : 'Mudar para tema escuro',
           ),
         ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Theme.of(context).primaryColorDark,
-        unselectedItemColor: Colors.grey.shade600,
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
-        showUnselectedLabels: true,
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: isDarkMode 
+                ? [AppTheme.primaryBlack, AppTheme.darkGray]
+                : [AppTheme.lightBackground, AppTheme.white],
+          ),
+        ),
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          gradient: isDarkMode ? AppTheme.darkGradient : AppTheme.lightGradient,
+          boxShadow: isDarkMode ? AppTheme.elevatedShadow : AppTheme.lightCardShadow,
+        ),
+        child: NavigationBar(
+          selectedIndex: _selectedIndex,
+          onDestinationSelected: _onItemTapped,
+          backgroundColor: Colors.transparent,
+          indicatorColor: (isDarkMode ? AppTheme.primaryGreen : AppTheme.secondaryGreen).withAlpha(50),
+          destinations: const [
+            NavigationDestination(
+              icon: Icon(AppIcons.dashboard),
+              selectedIcon: Icon(AppIcons.dashboardFilled),
+              label: 'Dashboard',
+            ),
+            NavigationDestination(
+              icon: Icon(AppIcons.shield),
+              selectedIcon: Icon(AppIcons.shieldFilled),
+              label: 'Status',
+            ),
+            NavigationDestination(
+              icon: Icon(AppIcons.water),
+              selectedIcon: Icon(AppIcons.waterFilled),
+              label: 'Simulação',
+            ),
+            NavigationDestination(
+              icon: Icon(AppIcons.weather),
+              selectedIcon: Icon(AppIcons.temperature),
+              label: 'Clima',
+            ),
+          ],
+        ),
       ),
     );
   }
