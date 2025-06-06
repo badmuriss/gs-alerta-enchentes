@@ -35,7 +35,7 @@ O objetivo é capacitar os cidadãos com informações em tempo real e históric
 | ├── Authentication | Gestão de login e cadastro de usuários.                              |
 | ├── Cloud Firestore| Banco de dados NoSQL para armazenar dados do usuário.                |
 | └── FCM            | Envio de notificações push para os alertas críticos.                 |
-| Weatherbit.io API  | Fonte exclusiva de dados meteorológicos (atuais, previsões e históricos). |
+| OpenWeather API  | Fonte exclusiva de dados meteorológicos (atuais, previsões e históricos). |
 | Sensores IoT  | Sensores para identificação de nível da água. |
 
 ## 🏛️ Arquitetura
@@ -46,14 +46,14 @@ O projeto segue a arquitetura **MVVM (Model-View-ViewModel)**, que garante uma e
 - **View:** As telas do aplicativo (Widgets em Flutter) que exibem as informações ao usuário.
 - **ViewModel:** Intermediário que prepara os dados do Model para a View e gerencia o estado da UI.
 
-## 🚀 Como Executar o Projeto
+<!-- ## 🚀 Como Executar o Projeto
 
 ### Pré-requisitos
 
 - [Flutter SDK](https://docs.flutter.dev/get-started/install)
 - IDE: Android Studio ou VS Code com as extensões do Flutter/Dart.
 - Conta no Firebase
-- Chave de API da Weatherbit.io
+- Chave de API da OpenWeather
 
 ### Instalação
 
@@ -91,7 +91,7 @@ Execute o aplicativo:
 
 ```bash
 flutter run
-```
+``` -->
 
 ## 🔮 Melhorias Futuras
 
